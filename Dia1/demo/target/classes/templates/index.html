@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <h1>Gestión de Usuarios</h1>
+
+    <!-- Lista de usuarios -->
+    <h2>Lista de Usuarios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.name}"></td>
+                <td th:text="${user.email}"></td>
+                <td>
+                    <!-- Enlace para editar usuario, que carga el formulario con los datos -->
+                    <a th:href="@{/users/edit/{id}(id=${user.id})}">Editar</a> |
+                    <a th:href="@{/users/delete/{id}(id=${user.id})}">Eliminar</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Formulario para agregar o editar usuario -->
+    <h2 th:text="${user.id != null ? 'Editar Usuario' : 'Agregar Usuario'}"></h2>
+    <form th:action="@{/users/save}" th:object="${user}" method="post" id="userForm">
+        <input type="hidden" th:field="*{id}" id="userId" />
+
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" th:field="*{name}" placeholder="Nombre" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" placeholder="Email" required><br>
+
+        <button type="submit" th:text="${user.id != null ? 'Actualizar' : 'Guardar'}"></button>
+    </form>
+</body>
+</html>
