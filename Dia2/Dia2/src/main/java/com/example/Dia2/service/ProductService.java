@@ -11,7 +11,6 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    // Constructor con inyección de dependencias
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }

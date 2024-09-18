@@ -12,7 +12,6 @@ public class ProductController {
     private final ProductService productService;
     private final Scanner scanner;
 
-    // Constructor con inyección de dependencias
     public ProductController(ProductService productService, Scanner scanner) {
         this.productService = productService;
         this.scanner = scanner;
@@ -28,7 +27,7 @@ public class ProductController {
             System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
             int option = scanner.nextInt();
-            scanner.nextLine(); // Limpiar el buffer
+            scanner.nextLine(); 
 
             switch (option) {
                 case 1:
@@ -41,25 +40,30 @@ public class ProductController {
                     findProductById();
                     break;
                 case 4:
-                    running = false;
-                    break;
+                    System.out.println("Saliendo...");
+                    scanner.close();
+                    System.exit(0);
                 default:
                     System.out.println("Opción inválida");
             }
         }
+        scanner.close();
     }
 
     private void addProduct() {
         System.out.print("Ingrese el ID del producto: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine(); 
         System.out.print("Ingrese el nombre del producto: ");
         String name = scanner.nextLine();
         System.out.print("Ingrese el precio del producto: ");
         double price = scanner.nextDouble();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine();
+        System.out.print("Ingrese la cantidad del producto: ");
+        int amount = scanner.nextInt();
+        scanner.nextLine();
 
-        Product product = new Product(id, name, price);
+        Product product = new Product(id, name, price, amount);
         productService.addProduct(product);
         System.out.println("Producto agregado: " + product);
     }
@@ -67,7 +71,7 @@ public class ProductController {
     private void findProductById() {
         System.out.print("Ingrese el ID del producto: ");
         Long id = scanner.nextLong();
-        scanner.nextLine(); // Limpiar el buffer
+        scanner.nextLine(); 
 
         Product product = productService.findProductById(id);
         if (product != null) {

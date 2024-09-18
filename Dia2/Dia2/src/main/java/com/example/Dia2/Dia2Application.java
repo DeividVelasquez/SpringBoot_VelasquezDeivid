@@ -10,7 +10,6 @@ public class Dia2Application implements CommandLineRunner {
 
     private final ProductController productController;
 
-    // Constructor con inyección de dependencias
     public Dia2Application(ProductController productController) {
         this.productController = productController;
     }
