@@ -20,7 +20,7 @@ public class PersonController {
     public List<Person> getAllPersons(){
         return personService.getAllPerson();
     }
-
+    
     //Obtener a una persona por ID
     @GetMapping("/{id}")
     public Person getPersonById(@PathVariable Long id){
